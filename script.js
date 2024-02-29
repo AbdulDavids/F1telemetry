@@ -211,5 +211,5 @@ function smoothUpdate(elementId, targetValue, duration) {
 
         // Update the text content of the element
         element.textContent = currentValue.toFixed(2); // You can adjust the precision as needed
-    }, 1); // Run approximately 1000 times per second
+    }, 100); // Run approximately 1000 times per second
 }
