@@ -112,7 +112,7 @@ dropdown.addEventListener('change', function() {
     let driverNumberDiv = document.getElementById('driverNumber');
     driverNumberDiv.textContent = driverNumber;
 
-    lastTime = "2024-02-29T11:30:00";
+    lastTime = "2024-02-29T10:30:00";
 
     // Set up an interval to fetch the data
     dataIntervalId = setInterval(() => {
@@ -122,7 +122,7 @@ dropdown.addEventListener('change', function() {
         let timestamp = date.toISOString();
 
         // Construct the API URL
-        let apiUrl = `https://api.openf1.org/v1/car_data?driver_number=${driverNumber}&session_key=latest&date=>${lastTime}`;
+        let apiUrl = `https://api.openf1.org/v1/car_data?driver_number=${driverNumber}&session_key=latest&date>${lastTime}`;
 
         // Use Fetch API to get the data
         fetch(apiUrl)
