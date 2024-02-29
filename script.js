@@ -102,8 +102,9 @@ dropdown.addEventListener('change', function() {
 
                 // Check if latestData is not undefined
                 if (latestData) {
+                    console.log('Data:', latestData);
                     // Update the placeholders with the latest data
-                    let headers = ['brake', 'gearNumber', 'rpm', 'sessionKey', 'speed', 'throttle'];
+                    let headers = ['brake', 'gearNumber', 'rpm', 'speed', 'throttle'];
                     headers.forEach(header => {
                         let div = document.getElementById(header);
                         div.textContent = `${latestData[header]}`;
