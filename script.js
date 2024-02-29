@@ -1,3 +1,5 @@
+const Ola = require('ola');
+
 // Fetch the data from the API
 fetch('https://api.openf1.org/v1/sessions?session_key=latest')
     .then(response => response.json())
@@ -155,6 +157,8 @@ dropdown.addEventListener('change', function() {
                     let drsInterpretation;
                     switch (drsValue) {
                         case 0:
+                            drsInterpretation = 'OFF';
+                            break;
                         case 1:
                             drsInterpretation = 'OFF';
                             break;
@@ -162,7 +166,11 @@ dropdown.addEventListener('change', function() {
                             drsInterpretation = 'AVAILABLE';
                             break;
                         case 10:
+                            drsInterpretation = 'ACTIVE';
+                            break;
                         case 12:
+                            drsInterpretation = 'ACTIVE';
+                            break;
                         case 14:
                             drsInterpretation = 'ACTIVE';
                             break;
@@ -189,27 +197,28 @@ dropdown.addEventListener('change', function() {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Modify the smoothUpdate function
 function smoothUpdate(elementId, targetValue, duration) {
     const element = document.getElementById(elementId);
     let currentValue = parseFloat(element.textContent);
     targetValue = parseFloat(targetValue);
 
-    // Calculate the difference and the increment per millisecond
-    const difference = targetValue - currentValue;
-    const increment = difference / duration;
+    // Create an Ola object with the current value
+    let animatedValue = Ola({value: currentValue}, duration);
 
-    // Start the interval
+    // Update the value of the Ola object to the target value
+    animatedValue.value = targetValue;
+
+    // Use an interval to update the text content of the element
     const intervalId = setInterval(() => {
-        // Increment the current value
-        currentValue += increment;
+        // Update the text content of the element
+        element.textContent = animatedValue.value.toFixed(2); // You can adjust the precision as needed
 
         // If the current value has reached the target value, stop the interval
-        if ((increment > 0 && currentValue >= targetValue) || (increment < 0 && currentValue <= targetValue)) {
-            currentValue = targetValue;
+        if (animatedValue.value === targetValue) {
             clearInterval(intervalId);
         }
-
-        // Update the text content of the element
-        element.textContent = currentValue.toFixed(2); // You can adjust the precision as needed
     }, 100); // Run approximately 1000 times per second
 }
