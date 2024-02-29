@@ -1,0 +1,17 @@
+{
+  "name": "f1telemetry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbdulDavids/F1telemetry.git"
+  },
+  "private": true,
+  "dependencies": {
+    "ola": "^1.2.1"
+  }
+}
