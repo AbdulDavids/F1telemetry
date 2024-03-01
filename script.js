@@ -166,7 +166,7 @@ dropdown.addEventListener('change', function() {
                 }
             })
             .catch(error => console.error('Error:', error));
-    }, 350); // Fetch data approximately 3.7 times per second
+    }, 400); // Fetch data approximately 3.7 times per second
 });
 
 
@@ -193,5 +193,5 @@ function smoothUpdate(elementId, targetValue, duration) {
         if (animatedValue.value === targetValue) {
             clearInterval(intervalId);
         }
-    }, 100);
+    }, 200);
 }
