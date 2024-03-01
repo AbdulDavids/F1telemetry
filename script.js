@@ -1,16 +1,17 @@
-
+let endDate = new Date('2024-02-29T10:30:00');
 fetch('https://api.openf1.org/v1/sessions?session_key=latest')
     .then(response => response.json())
     .then(data => {
         let session = data[0];
         let sessionType = session.session_name;
         let circuitShortName = session.circuit_short_name;
-        let endDate = new Date(session.date_end);
+        endDate = new Date(session.date_end);
         let sessionName = session.session_name;
         let location = session.location;
         let countryName = session.country_name;
 
         console.log('Session Data:', data);
+        console.log('Session end date:', endDate);
 
 
 
@@ -125,7 +126,13 @@ dropdown.addEventListener('change', function() {
                     let time = latestData['date'];
                     lastTime = time;
                     let timeDiv = document.getElementById('timestamp');
-                    timeDiv.textContent = time.substring(11, 22);
+
+
+                    let timeRemaining = calculateTimeRemaining(endDate, time);
+
+                    // ${time.substring(11, 22)},
+
+                    timeDiv.textContent = `${timeRemaining} remaining`;
                     console.log('Time:', time);
 
                     let nGearDiv = document.getElementById('n_gear');
@@ -194,4 +201,18 @@ function smoothUpdate(elementId, targetValue, duration) {
             clearInterval(intervalId);
         }
     }, 200);
+}
+
+
+
+function calculateTimeRemaining(endDate, time) {
+    let now = new Date(time);
+    let timeRemaining = endDate - now;
+
+    let hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+    let minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    // Format the time remaining as H:M:S
+    return `${hours}h ${minutes}m ${seconds}s`;
 }
